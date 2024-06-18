@@ -15,14 +15,14 @@ module.exports = {
 		envConfig: {}
 	},
 	onStart: async function ({ message }) {
-		const botName = "yazky";
+		const botName = "zach";
 		const botPrefix = "!";
-		const authorName = "CliffVincent";
-		const ownAge = "18";
+		const authorName = "ChatBotV5";
+		const ownAge = "null";
 		const teamName = "Github team";
-		const authorFB = "https://www.facebook.com/swordigo.swordslush";
-		const authorInsta = "Thead469";
-		const tikTok = "tiktok.com/@Cliffthegreat0";
+		const authorFB = "https://www.facebook.com/zachary.pnaveax";
+		const authorInsta = "zach";
+		const tikTok = "";
 		const urls = JSON.parse(fs.readFileSync('cliff.json'));
 		const link = urls[Math.floor(Math.random() * urls.length)];
 		const now = moment().tz('Asia/Jakarta');

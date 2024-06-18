@@ -1,69 +1,79 @@
-const axios = require("axios");
+const axios = require('axios');
+
+const Prefixes = [
+  'gpt',
+  'ai2',
+  'what',
+  '/ai2',
+];
+
 module.exports = {
-	config: {
-		name: 'ai2',
-		version: '2.1.0',
-		author: 'KENLIEPLAYS',
-		countDown: 5,
-		role: 0,
-		shortDescription: 'AI by Kenlie Navacilla Jugarap',
-		longDescription: {
-			en: 'AI by Kenlie Navacilla Jugarap'
-		},
-		category: 'ai',
-		guide: {
-			en: '   {pn} <word>: ask with AI'
-				+ '\n   Example:{pn} hi'
-		}
-	},
+  config: {
+    name: 'ai2',
+    version: '2.5.4',
+    author: 'sharleyy',//credits owner of this api
+    role: 0,
+    category: 'ai',
+    shortDescription: {
+      en: 'Asks an AI for an answer.',
+    },
+    longDescription: {
+      en: 'Asks an AI for an answer based on the user prompt.',
+    },
+    guide: {
+      en: '{pn} [prompt]',
+    },
+  },
 
-	langs: {
-		en: {
-			chatting: 'Please wait...',
-			error: 'If this report spam please contact Kenlie Navacilla Jugarap'
-		}
-	},
+  langs: {
+    en: {
+      final: "🤖 | 𝙲𝚑𝚊𝚝𝙶𝙿𝚃 |",
+      loading: "🤖 | 𝙲𝚑𝚊𝚝𝙶𝙿𝚃 |\n━━━━━━━━━━━━━━━\n⏳ | 𝙋𝙡𝙚𝙖𝙨𝙚 𝙬𝙖𝙞𝙩......\n━━━━━━━━━━━━━━━\n"
+    }
+  },
 
-	onStart: async function ({ args, message, event, getLang }) {
-		if (args[0]) {
-			const yourMessage = args.join(" ");
-			try {
-				const responseMessage = await getMessage(yourMessage);
-				return message.reply(`${responseMessage}`);
-			}
-			catch (err) {
-				console.log(err)
-				return message.reply(getLang("error"));
-			}
-		}
-	},
+  onStart: async function () {},
 
-	onChat: async ({ args, message, threadsData, event, isUserCallCommand, getLang }) => {
-		if (!isUserCallCommand) {
-			return;
-		}
-		if (args.length > 1) {
-			try {
-				const langCode = await threadsData.get(event.threadID, "settings.lang") || global.GoatBot.config.language;
-				const responseMessage = await getMessage(args.join(" "), langCode);
-				return message.reply(`${responseMessage}`);
-			}
-			catch (err) {
-				return message.reply(getLang("error"));
-			}
-		}
-	}
+  onChat: async function ({ api, event, args, getLang, message }) {
+    try {
+      const prefix = Prefixes.find((p) => event.body && event.body.toLowerCase().startsWith(p));
+
+      if (!prefix) {
+        return;
+      }
+
+      const prompt = event.body.substring(prefix.length).trim();
+
+      if (prompt === '') {
+
+        await message.reply(
+          "Kindly provide the question at your convenience and I shall strive to deliver an effective response. Your satisfaction is my top priority."
+        );
+        
+        return;
+      }
+
+      const loadingMessage = getLang("loading");
+      const loadingReply = await message.reply(loadingMessage);
+      const url = "https://hercai.onrender.com/v3/hercai"; // Replace with the new API endpoint
+      const response = await axios.get(`${url}?question=${encodeURIComponent(prompt)}`);
+
+      if (response.status !== 200 || !response.data) {
+        throw new Error('Invalid or missing response from API');
+      }
+
+      const messageText = response.data.reply.trim(); // Adjust according to the response structure of the new API
+      const userName = getLang("final");
+      const finalMsg = `${userName}\n━━━━━━━━━━━━━━━\n${messageText}\n━━━━━━━━━━━━━━━\n`;
+     api.editMessage(finalMsg, loadingReply.messageID); 
+
+      console.log('Sent answer as a reply to user');
+    } catch (error) {
+      console.error(`Failed to get answer: ${error.message}`);
+      api.sendMessage(
+        `${error.message}.\n\nYou can try typing your question again or resending it, as there might be a bug from the server that's causing the problem. It might resolve the issue.`,
+        event.threadID
+      );
+    }
+  },
 };
-
-async function getMessage(yourMessage, langCode) {
-	try {
-		const res = await axios.get(`https://api.kenliejugarap.com/ai/?text=${yourMessage}`);
-		if (!res.data.response) {
-			throw new Error('Please contact Kenlie Navacilla Jugarap if this error spams...');
-		}
-		return res.data.response;
-	} catch (err) {
-		console.error('Error while getting a message:', err);
-		throw err;
-	}
-}
