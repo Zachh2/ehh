@@ -96,6 +96,13 @@ module.exports = {
 								const command = commands.get(commandName) || commands.get(aliases.get(commandName));
 
 								// ———————————————— LIST ALL COMMAND ——————————————— //
+								const descriptionCustomLang = customLang[configCommand.name]?.longDescription;
+												let description = checkLangObject(configCommand.longDescription, langCode);
+												if (description == undefined)
+																if (descriptionCustomLang != undefined)
+																				description = checkLangObject(descriptionCustomLang, langCode);
+																else
+																				description = getLang("doNotHave");
 								if (!command && !args[0] || !isNaN(args[0])) {
 												const arrayInfo = [];
 												let msg = "";
@@ -128,7 +135,7 @@ module.exports = {
 
 																const returnArray = allPage[page - 1] || [];
 																const startNumber = (page - 1) * numberOfOnePage + 1;
-																msg += (returnArray || []).reduce((text, item, index) => text += `━━━━━━━━━━━━\n╭┈ ❒ 「 ${index + startNumber}${index + startNumber < 10 ? " " : ""} 」➪ ${item.data} \n╰┈➤ Description: ${item.shortDescription}\n━━━━━━━━━━━━\n\n`, '\n').slice(0, -1);
+																msg += (returnArray || []).reduce((text, item, index) => text += `━━━━━━━━━━━━\n╭┈ ❒ 「 ${index + startNumber}${index + startNumber < 10 ? " " : ""} 」➪ ${item.data} \n╰┈➤ Description: ${description}\n━━━━━━━━━━━━\n\n`, '\n').slice(0, -1);
 																await message.reply(getLang("help", msg, page, totalPage, commands.size, prefix, doNotDelete));
 												}
 												else if (sortHelp == "category") {
