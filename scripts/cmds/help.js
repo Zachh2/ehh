@@ -120,8 +120,6 @@ module.exports = {
 																								priority: value.priority || 0
 																				});
 																}
-															
-															
 																arrayInfo.sort((a, b) => a.data - b.data); // sort by name
 																arrayInfo.sort((a, b) => a.priority > b.priority ? -1 : 1); // sort by priority
 																const { allPage, totalPage } = global.utils.splitPage(arrayInfo, numberOfOnePage);
