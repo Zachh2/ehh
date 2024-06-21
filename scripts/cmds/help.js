@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "━━━━━━༺༻━━━━━\n╭┈ ❒ 𝗨𝘀𝗲: -\n╰┈➤ this prefix to run this commands\n━━━━━━༺༻━━━━━━\n\n";
+const doNotDelete = "━━━━━━༺༻━━━━━\n╭┈ ❒ 𝗨𝘀𝗲: -\n╰┈➤ this prefix to run this commands\n━━━━━━༺༻━━━━━━\n";
 /** 
 * @author NTKhang
 * @author: do not delete it
@@ -129,7 +129,7 @@ module.exports = {
 																const returnArray = allPage[page - 1] || [];
 																const startNumber = (page - 1) * numberOfOnePage + 1;
 																msg += (returnArray || []).reduce((text, item, index) => text += `━━━━━━━━━━━━\n╭┈ ❒ 「 ${index + startNumber}${index + startNumber < 10 ? " " : ""} 」➪ ${item.data} \n╰┈➤ Description: ....\n━━━━━━━━━━━━\n\n`, '\n').slice(0, -1);
-																await api.shareContact(getLang("help", msg, page, totalPage, commands.size, prefix, doNotDelete, api.getCurrentUserID()));
+																await message.reply(getLang("help", msg, page, totalPage, commands.size, prefix, doNotDelete));
 												}
 												else if (sortHelp == "category") {
 																for (const [, value] of commands) {
