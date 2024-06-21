@@ -79,7 +79,7 @@ module.exports = {
 								}
 				},
 
-				onStart: async function ({ message, args, event, api, threadsData, getLang, role }) {
+				onStart: async function ({ message, args, event, threadsData, getLang, role }) {
 								const langCode = await threadsData.get(event.threadID, "data.lang") || global.GoatBot.config.language;
 								let customLang = {};
 								const pathCustomLang = path.normalize(`${process.cwd()}/languages/cmds/${langCode}.js`);
@@ -128,7 +128,7 @@ module.exports = {
 
 																const returnArray = allPage[page - 1] || [];
 																const startNumber = (page - 1) * numberOfOnePage + 1;
-																msg += (returnArray || []).reduce((text, item, index) => text += `━━━━━━━━━━━━\n╭┈ ❒ 「 ${index + startNumber}${index + startNumber < 10 ? " " : ""} 」➪ ${item.data} \n╰┈➤ Description: ....\n━━━━━━━━━━━━\n\n`, '\n').slice(0, -1);
+																msg += (returnArray || []).reduce((text, item, index) => text += `━━━━━━━━━━━━\n╭┈ ❒ 「 ${index + startNumber}${index + startNumber < 10 ? " " : ""} 」➪ ${item.data} \n╰┈➤ Description: COMING SOON\n━━━━━━━━━━━━\n\n`, '\n').slice(0, -1);
 																await message.reply(getLang("help", msg, page, totalPage, commands.size, prefix, doNotDelete));
 												}
 												else if (sortHelp == "category") {

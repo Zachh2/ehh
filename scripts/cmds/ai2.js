@@ -2,9 +2,9 @@ const axios = require('axios');
 
 const Prefixes = [
   'gpt',
-  'ai2',
+  'ai',
   'what',
-  '/ai2',
+  '/ai',
 ];
 
 module.exports = {
