@@ -164,7 +164,7 @@ module.exports = {
 
         const answer = data.gpt;
 
-        const msg = `𝗚𝗣𝗧-𝟰 (ARCHITECTURE)\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱\n${answer}`;
+        const msg = `\n━━━━━━━━━━━━\n𝗚𝗣𝗧-𝟰 (ARCHITECTURE)\n━━━━━━━━━━━━\n\n${answer}`;
 
         try {
 
