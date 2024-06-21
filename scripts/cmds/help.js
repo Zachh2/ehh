@@ -120,13 +120,8 @@ module.exports = {
 																								priority: value.priority || 0
 																				});
 																}
-																const descriptionCustomLang = customLang[configCommand.name]?.longDescription;
-																let description = checkLangObject(configCommand.longDescription, langCode);
-																if (description == undefined)
-																				if (descriptionCustomLang != undefined)
-																								description = checkLangObject(descriptionCustomLang, langCode);
-																				else
-																								description = getLang("doNotHave");
+															
+															
 																arrayInfo.sort((a, b) => a.data - b.data); // sort by name
 																arrayInfo.sort((a, b) => a.priority > b.priority ? -1 : 1); // sort by priority
 																const { allPage, totalPage } = global.utils.splitPage(arrayInfo, numberOfOnePage);
@@ -135,7 +130,7 @@ module.exports = {
 
 																const returnArray = allPage[page - 1] || [];
 																const startNumber = (page - 1) * numberOfOnePage + 1;
-																msg += (returnArray || []).reduce((text, item, index) => text += `━━━━━━━━━━━━\n╭┈ ❒ 「 ${index + startNumber}${index + startNumber < 10 ? " " : ""} 」➪ ${item.data} \n╰┈➤ Description: ${description}\n━━━━━━━━━━━━\n\n`, '\n').slice(0, -1);
+																msg += (returnArray || []).reduce((text, item, index) => text += `━━━━━━━━━━━━\n╭┈ ❒ 「 ${index + startNumber}${index + startNumber < 10 ? " " : ""} 」➪ ${item.data} \n╰┈➤ Description: ...\n━━━━━━━━━━━━\n\n`, '\n').slice(0, -1);
 																await message.reply(getLang("help", msg, page, totalPage, commands.size, prefix, doNotDelete));
 												}
 												else if (sortHelp == "category") {
