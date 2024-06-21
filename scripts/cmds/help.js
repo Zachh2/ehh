@@ -96,13 +96,7 @@ module.exports = {
 								const command = commands.get(commandName) || commands.get(aliases.get(commandName));
 
 								// ———————————————— LIST ALL COMMAND ——————————————— //
-								const descriptionCustomLang = customLang[configCommand.name]?.longDescription;
-												let description = checkLangObject(configCommand.longDescription, langCode);
-												if (description == undefined)
-																if (descriptionCustomLang != undefined)
-																				description = checkLangObject(descriptionCustomLang, langCode);
-																else
-																				description = getLang("doNotHave");
+						
 								if (!command && !args[0] || !isNaN(args[0])) {
 												const arrayInfo = [];
 												let msg = "";
@@ -126,7 +120,13 @@ module.exports = {
 																								priority: value.priority || 0
 																				});
 																}
-
+																const descriptionCustomLang = customLang[configCommand.name]?.longDescription;
+																let description = checkLangObject(configCommand.longDescription, langCode);
+																if (description == undefined)
+																				if (descriptionCustomLang != undefined)
+																								description = checkLangObject(descriptionCustomLang, langCode);
+																				else
+																								description = getLang("doNotHave");
 																arrayInfo.sort((a, b) => a.data - b.data); // sort by name
 																arrayInfo.sort((a, b) => a.priority > b.priority ? -1 : 1); // sort by priority
 																const { allPage, totalPage } = global.utils.splitPage(arrayInfo, numberOfOnePage);
