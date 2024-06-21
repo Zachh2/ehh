@@ -36,7 +36,7 @@ module.exports = {
 		const uptimeString = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
 
 		message.reply({
-			body: `《  Bot & Owner Info 》
+			body: `  Bot & Owner Info 
 \Name: ${botName}
 \Bot Prefix: ${botPrefix}
 \owner: ${authorName}
