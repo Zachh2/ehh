@@ -53,11 +53,11 @@ case "deposit":
 
 
   if (bankBalance >= 1e104) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏You cannot deposit money when your bank balance is already at $1e104 ✖️•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏You cannot deposit money when your bank balance is already at $1e104 ✖•\n\n╚════ஜ۩۞۩ஜ═══╝");
   }
 
   if (userMoney < amount) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏You don't have the required amount to deposit ✖️•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏You don't have the required amount to deposit ✖•\n\n╚════ஜ۩۞۩ஜ═══╝");
   }
 
   bankData[user].bank += amount;
@@ -144,7 +144,7 @@ case "transfer":
   }
 
   if (!recipientUID || !bankData[recipientUID]) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Recipient not found in the bank database. Please check the recipient's ID ✖️•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Recipient not found in the bank database. Please check the recipient's ID ✖•\n\n╚════ஜ۩۞۩ஜ═══╝");
   }
 
   if (recipientUID === user) {
@@ -159,7 +159,7 @@ case "transfer":
   }
 
   if (amount > senderBankBalance) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏You don't have enough money in your bank account for this transfer ✖️•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏You don't have enough money in your bank account for this transfer ✖•\n\n╚════ஜ۩۞۩ஜ═══╝");
   }
 
   bankData[user].bank -= amount;
@@ -190,16 +190,16 @@ break;
 
 
 case "loan":
-  const maxLoanAmount = 100000000; //increase of decrease this
+  const maxLoanAmount = 20000; //increase of decrease this
   const userLoan = bankData[user].loan || 0;
   const loanPayed = bankData[user].loanPayed !== undefined ? bankData[user].loanPayed : true;
 
   if (!amount) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Please enter a valid loan amount ✖️•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Please enter a valid loan amount ✖•\n\n╚════ஜ۩۞۩ஜ═══╝");
   }
 
   if (amount > maxLoanAmount) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏The maximum loan amount is $100000000 ❗•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏The maximum loan amount is $20000 ❗•\n\n╚════ஜ۩۞۩ஜ═══╝");
   }
 
   if (!loanPayed && userLoan > 0) {
@@ -221,7 +221,7 @@ case "payloan":
   const loanBalance = bankData[user].loan || 0;
 
   if (isNaN(amount) || amount <= 0) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Please enter a valid amount to repay your loan ✖️•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Please enter a valid amount to repay your loan ✖•\n\n╚════ஜ۩۞۩ஜ═══╝");
   }
 
   if (loanBalance <= 0) {
