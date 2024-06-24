@@ -4,7 +4,7 @@ module.exports = {
 		author: "cliff",
 		version: "1.5.0",
 		countDown: 10,
-		role: 0,
+		role: 2,
 		category: "Admin",
 		shortDescription: {
 			en: "leave all group"
