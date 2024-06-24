@@ -48,16 +48,16 @@ if (!bankData[user]) {
     switch (command) {
 case "deposit":
   if (isNaN(amount) || amount <= 0) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Please enter a valid amount to deposit 🔁•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("🏦 Bank 🏦\n\n❏Please enter a valid amount to deposit 🔁•");
   }
 
 
   if (bankBalance >= 1e104) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏You cannot deposit money when your bank balance is already at $1e104 ✖•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("🏦 Bank 🏦\n\n❏You cannot deposit money when your bank balance is already at $1e104 ✖•");
   }
 
   if (userMoney < amount) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏You don't have the required amount to deposit ✖•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("🏦 Bank 🏦\n\n❏You don't have the required amount to deposit ✖•");
   }
 
   bankData[user].bank += amount;
@@ -66,7 +66,7 @@ case "deposit":
   });
 fs.writeFileSync(bankDataPath, JSON.stringify(bankData), "utf8");
 
-  return message.reply(`╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Successfully deposited $${amount} into your bank account ✅•\n\n╚════ஜ۩۞۩ஜ═══╝`);
+  return message.reply(`🏦 Bank 🏦\n\n❏Successfully deposited $${amount} into your bank account ✅•`);
 break;
 
 
@@ -74,15 +74,15 @@ case "withdraw":
   const balance = bankData[user].bank || 0;
 
   if (isNaN(amount) || amount <= 0) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Please enter the correct amount to withdraw 😪•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("🏦 Bank 🏦\n\n❏Please enter the correct amount to withdraw 😪•");
   }
 
   if (userMoney >= 1e104) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏You cannot withdraw money when your balance is already at 1e104 😒•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("🏦 Bank 🏦\n\n❏You cannot withdraw money when your balance is already at 1e104 😒•");
   }
 
   if (amount > balance) {
-    return message.reply("╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏The requested amount is greater than the available balance in your bank account 🗿•\n\n╚════ஜ۩۞۩ஜ═══╝");
+    return message.reply("🏦 Bank 🏦\n\n❏The requested amount is greater than the available balance in your bank account 🗿•");
   }
 
   // Continue with the withdrawal if the userMoney is not at 1e104
@@ -91,7 +91,7 @@ case "withdraw":
     money: userMoney + amount
   });
 fs.writeFileSync(bankDataPath, JSON.stringify(bankData), "utf8");
-  return message.reply(`╔════ஜ۩۞۩ஜ═══╗\n\n[🏦 Bank 🏦]\n\n❏Successfully withdrew $${amount} from your bank account ✅•\n\n╚════ஜ۩۞۩ஜ═══╝`);
+  return message.reply(`🏦 Bank 🏦\n\n❏Successfully withdrew $${amount} from your bank account ✅•`);
   break;
 
 
@@ -107,7 +107,7 @@ case "balance":
 
 
 case "interest":
-  const interestRate = 0.001; // 0.1% daily interest rate
+  const interestRate = 0.005; // 0.1% daily interest rate
   const lastInterestClaimed = bankData[user].lastInterestClaimed || 0;
 
   const currentTime = Date.now();
