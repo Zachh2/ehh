@@ -190,7 +190,7 @@ break;
 
 
 case "loan":
-  const maxLoanAmount = 20000; //increase of decrease this
+  const maxLoanAmount = 25000; //increase of decrease this
   const userLoan = bankData[user].loan || 0;
   const loanPayed = bankData[user].loanPayed !== undefined ? bankData[user].loanPayed : true;
 
