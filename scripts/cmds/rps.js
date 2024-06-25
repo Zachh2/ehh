@@ -6,16 +6,9 @@ module.exports = {
     countDown: "20",
     shortDescription: "Play rock-paper-scissors game with the bot.",
     category: "fun",
-    guide: "{prefix}rps <✊|🖐️|✌️> <amount>"
+    guide: "{prefix}rps <✊|paper🖐️|scissors✌️> <amount>"
   },
- langs: {
-    en: {
-      final: " | WAITING |",
-      loading: "━━━━━━━━━━━━━━━\n⏳ | waiting \n━━━━━━━━━━━━━━━\n"
-    }
-  }
-},
-  onStart: async function ({ message, args, event, envCommands, usersData, api }) {
+  onStart: async function ({ message, args, event, envCommands, usersData }) {
     const { senderID } = event;
     const userData = await usersData.get(senderID);
 
@@ -23,28 +16,24 @@ module.exports = {
     const userChoice = args[0];
     const amount = parseInt(args[1]);
 
-    const userName = getLang("final");
-    const loadingMessage = getLang("loading");
-    const loadingReply = await message.reply(loadingMessage);
-
     if (!userChoice || !choices.includes(userChoice.toLowerCase())) {
-      return api.editMessage(loadingReply.messageID, "Please choose either ✊, 🖐️, or ✌️");
+      return message.reply("Please choose either ✊, 🖐️, or ✌️");
     }
 
     if (isNaN(amount) || amount <= 0) {
-      return api.editMessage(loadingReply.messageID, "Invalid amount! Please bet a positive number.");
+      return message.reply("Invalid amount! Please bet a positive number.");
     }
 
     if (amount > userData.money) {
-      return api.editMessage(loadingReply.messageID, "You don't have enough money to place this bet.");
+      return message.reply("You don't have enough money to place this bet.");
     }
 
     const botChoice = choices[Math.floor(Math.random() * choices.length)];
 
-    await api.editMessage(loadingReply.messageID, `You chose ${userChoice}. I chose ${botChoice}.`);
+    message.reply(`You chose ${userChoice}. I chose ${botChoice}.`);
 
     if (userChoice.toLowerCase() === botChoice) {
-      return api.editMessage(loadingReply.messageID, "It's a tie! ⚖️");
+      return message.reply("It's a tie! ⚖️");
     }
 
     const userWins = 
@@ -55,17 +44,15 @@ module.exports = {
     if (userWins) {
       await usersData.set(senderID, {
         ...userData,
-        money: userData.money + amount
+        money: userData.money + (amount * 2)
       });
-      return api.editMessage(loadingReply.messageID, `Congratulations! You won ${amount} money! 🎉`);
+      return message.reply(`Congratulations! You won ${amount} money! 🎉`);
     } else {
       await usersData.set(senderID, {
         ...userData,
         money: userData.money - amount
       });
-      return api.editMessage(loadingReply.messageID, `I win! You lost ${amount} money! Better luck next time! 😎`);
+      return message.reply(`I win! You lost ${amount} money! Better luck next time! 😎`);
     }
   }
 };
-
-// Language strings
