@@ -1,6 +1,7 @@
 module.exports = {
  config: {
  name: "sing",
+ aliases: ["music"],
  version: "1.0",
  role: 0,
  author: "kshitiz",
