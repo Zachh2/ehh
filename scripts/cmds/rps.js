@@ -28,31 +28,27 @@ module.exports = {
       return message.reply("You don't have enough money to place this bet.");
     }
 
-    const botChoice = choices[Math.floor(Math.random() * choices.length)];
+    let botChoice;
+    switch (userChoice.toLowerCase()) {
+      case "✊":
+        botChoice = "🖐️"; // Bot wins with paper
+        break;
+      case "🖐️":
+        botChoice = "✌️"; // Bot wins with scissors
+        break;
+      case "✌️":
+        botChoice = "✊"; // Bot wins with rock
+        break;
+    }
 
     message.reply(`You chose ${userChoice}. I chose ${botChoice}.`);
 
-    if (userChoice.toLowerCase() === botChoice) {
-      return message.reply("It's a tie! ⚖️");
-    }
+    // Since the bot always wins, directly adjust the user's money
+    await usersData.set(senderID, {
+      ...userData,
+      money: userData.money - amount
+    });
 
-    const userWins = 
-      (userChoice.toLowerCase() === "✊" && botChoice === "✌️") ||
-      (userChoice.toLowerCase() === "🖐️" && botChoice === "✊") ||
-      (userChoice.toLowerCase() === "✌️" && botChoice === "🖐️");
-
-    if (userWins) {
-      await usersData.set(senderID, {
-        ...userData,
-        money: userData.money + (amount * 2)
-      });
-      return message.reply(`Congratulations! You won ${amount} money! 🎉`);
-    } else {
-      await usersData.set(senderID, {
-        ...userData,
-        money: userData.money - amount
-      });
-      return message.reply(`I win! You lost ${amount} money! Better luck next time! 😎`);
-    }
+    return message.reply(`I win! You lost ${amount} money! Better luck next time! 😎`);
   }
 };
