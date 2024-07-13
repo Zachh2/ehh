@@ -5,11 +5,11 @@ const path = require("path");
 
 module.exports = {
   config: {
-    name: "randomvideo",
+    name: "bold",
     aliases: [],
     version: "1.0",
-    author: "kshitiz",
-    countDown: 20,
+    author: "zach",
+    countDown: 40,
     role: 2,
     shortDescription: "get a random video from API",
     longDescription: "",
@@ -19,7 +19,7 @@ module.exports = {
   onStart: async function ({ api, event }) {
     try {
       api.sendMessage("Your video is loading...!", event.threadID);
-      const response = await axios.get("https://useless.np-venomvenom.repl.co/random-video");
+      const response = await axios.get("https://redroomapi-s-e98g.onrender.com/bold");
       const videoData = response.data.data;
       const videoURL = videoData.url;
       const videoID = videoData.id;
