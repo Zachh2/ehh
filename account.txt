@@ -40,7 +40,7 @@
     },
     {
         "domain": ".facebook.com",
-        "expirationDate": 1726998489,
+        "expirationDate": 1729676431,
         "hostOnly": false,
         "httpOnly": false,
         "name": "vpd",
@@ -66,7 +66,7 @@
     },
     {
         "domain": ".facebook.com",
-        "expirationDate": 1753350489,
+        "expirationDate": 1756028431,
         "hostOnly": false,
         "httpOnly": false,
         "name": "fbl_st",
@@ -75,11 +75,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "100429439%3BT%3A28696908"
+        "value": "100422712%3BT%3A28741540"
     },
     {
         "domain": ".facebook.com",
-        "expirationDate": 1722136774.805583,
+        "expirationDate": 1725097226.715216,
         "hostOnly": false,
         "httpOnly": false,
         "name": "locale",
@@ -89,18 +89,6 @@
         "session": false,
         "storeId": null,
         "value": "en_US"
-    },
-    {
-        "domain": ".facebook.com",
-        "hostOnly": false,
-        "httpOnly": false,
-        "name": "m_pixel_ratio",
-        "path": "/",
-        "sameSite": null,
-        "secure": true,
-        "session": true,
-        "storeId": null,
-        "value": "2"
     },
     {
         "domain": ".facebook.com",
@@ -143,20 +131,7 @@
     },
     {
         "domain": ".facebook.com",
-        "expirationDate": 1722419260,
-        "hostOnly": false,
-        "httpOnly": false,
-        "name": "wd",
-        "path": "/",
-        "sameSite": "lax",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "360x668"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1729590491,
+        "expirationDate": 1732268431,
         "hostOnly": false,
         "httpOnly": false,
         "name": "wl_cbv",
@@ -165,6 +140,6 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "v2%3Bclient_version%3A2571%3Btimestamp%3A1721814490"
+        "value": "v2%3Bclient_version%3A2601%3Btimestamp%3A1724492428"
     }
 ]
